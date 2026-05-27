@@ -3,32 +3,62 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>metaxxd profile</title>
+<meta name="description" content="metaxxd — IT-студентка, ломаю systems, а не людей. CTF, Python, web security ♡" />
+<meta name="theme-color" content="#ff52cc" />
+<title>metaxxd profile ♡</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%96%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+<!-- Matrix rain бэкграунд -->
+<canvas id="matrix-bg"></canvas>
+
+<!-- Boot loader -->
+<div class="boot-screen" id="boot-screen">
+    <div class="boot-logo">METAXXD.SYS</div>
+    <div class="boot-log"></div>
+    <div class="boot-bar"><div></div></div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close">✕</span>
+    <img src="" alt="" />
+</div>
+
 <div class="page-wrapper">
 
-    <div class="deco-cat-topleft">(=^ ◡ ^=) &lt;3</div>
-    <div class="deco-cat-topright">> coffee<br><span style="color:#ff52cc;">&gt; sleep</span><br>&gt; code<br>&gt; repeat</div>
-    
+    <div class="hud-corner tl"></div>
+    <div class="hud-corner tr"></div>
+    <div class="hud-corner bl"></div>
+    <div class="hud-corner br"></div>
 
-    <div class="header-section">
+    <div class="deco-cat-topleft">(=^ ◡ ^=) &lt;3</div>
+    <div class="deco-cat-topright">
+        &gt; <span class="live-clock">--:--:--</span><br>
+        &gt; coffee<br>
+        <span style="color:#ff52cc;">&gt; sleep</span><br>
+        &gt; code<br>
+        &gt; repeat
+    </div>
+
+    <div class="header-section reveal">
         <div class="avatar-container">
             <img class="avatar-frame" src="https://i.pinimg.com/736x/05/6a/fe/056afe816bac85a9b89f651e11ecf9c9.jpg" alt="cyber anime profile" />
+            <div class="online-badge">online</div>
             <div class="feature-sticker">не баг а фича 💖</div>
         </div>
 
         <div class="welcome-container">
             <div class="window-header">
-                <div class="window-title-prompt">&gt;_</div>
+                <div class="window-title-prompt">&gt;_ profile.exe</div>
                 <div class="window-controls">
-                    <div class="win-btn">_</div>
-                    <div class="win-btn">▢</div>
-                    <div class="win-btn">✕</div>
+                    <div class="win-btn" title="свернуть">_</div>
+                    <div class="win-btn" title="развернуть">▢</div>
+                    <div class="win-btn" title="закрыть">✕</div>
                 </div>
-                <h1 class="main-welcome-title">ДОБРО ПОЖАЛОВАТЬ</h1>
+                <h1 class="main-welcome-title glitch" data-text="ДОБРО ПОЖАЛОВАТЬ">ДОБРО ПОЖАЛОВАТЬ</h1>
                 <div class="sub-welcome-title">НА МОЮ СТРАНИЧКУ ♡</div>
             </div>
 
@@ -43,7 +73,8 @@
         </div>
     </div>
 
-    <div class="table-container">
+    <h2 class="section-title reveal">profile.json</h2>
+    <div class="table-container reveal">
         <table class="cyber-table">
             <tr class="table-header-row">
                 <th class="col-block">Блок</th>
@@ -56,30 +87,30 @@
             <tr>
                 <th class="row-label">🧠 Навыки</th>
                 <td>
-                    <span class="keyword">Python</span> (иногда работает без вопросов), 
-                    <span class="keyword">Linux</span> (команды помню, но не всегда понимаю, что они делают), 
-                    <span class="keyword">Git</span> (ctrl+z для жизни, но не всегда), 
-                    сети (<span class="keyword">TCP/IP</span> — это когда что-то отправили и молимся, што не спиздили медь🙏), 
-                    веб (<span class="keyword">HTML/CSS/JS</span> — сайты держатся на честном слове(не держатся)), 
+                    <span class="keyword">Python</span> (иногда работает без вопросов),
+                    <span class="keyword">Linux</span> (команды помню, но не всегда понимаю, что они делают),
+                    <span class="keyword">Git</span> (ctrl+z для жизни, но не всегда),
+                    сети (<span class="keyword">TCP/IP</span> — это когда что-то отправили и молимся, што не спиздили медь🙏),
+                    веб (<span class="keyword">HTML/CSS/JS</span> — сайты держатся на честном слове(не держатся)),
                     <span class="keyword">Telethon</span> (создаю цифровых помощников с помощью вайб помощников)
                 </td>
             </tr>
             <tr>
                 <th class="row-label">🔧 Практика</th>
                 <td>
-                    <span class="keyword">CTF</span> (официально ломаю учебные сайты, неофициально учусь на ошибках), 
-                    <span class="keyword">userbot</span> проекты (делаю ботов, которые не делают ничего полезного), 
-                    автоматизация (скрипты для лени, которые иногда требуют больше работы), 
+                    <span class="keyword">CTF</span> (официально ломаю учебные сайты, неофициально учусь на ошибках),
+                    <span class="keyword">userbot</span> проекты (делаю ботов, которые не делают ничего полезного),
+                    автоматизация (скрипты для лени, которые иногда требуют больше работы),
                     <span class="keyword">OSINT</span> (гуглю)
                 </td>
             </tr>
             <tr>
                 <th class="row-label">🎯 Интересы</th>
                 <td>
-                    <span class="keyword">Web security</span> (ненавижу), 
-                    <span class="keyword">backend</span> (магия, которая “просто работает”, пока не трогаешь), 
-                    <span class="keyword">reverse engineering</span> (открыть, посмотреть на асм/си, закрыть), 
-                    <span class="keyword">OSINT</span> (интернет ничего не забывает, к сожалению), 
+                    <span class="keyword">Web security</span> (ненавижу),
+                    <span class="keyword">backend</span> (магия, которая "просто работает", пока не трогаешь),
+                    <span class="keyword">reverse engineering</span> (открыть, посмотреть на асм/си, закрыть),
+                    <span class="keyword">OSINT</span> (интернет ничего не забывает, к сожалению),
                     <span class="keyword">AI tools</span> (помощник, который умнее меня),
                     <span class="keyword">Электроника</span> а у меня две еспшки есть
                 </td>
@@ -90,13 +121,13 @@
             </tr>
             <tr>
                 <th class="row-label">🚀 Цель</th>
-                <td>Стажировка / junior позиция, где можно трогать реальные системы и это не считается “вредительством” + GitHub, который выглядит как живой</td>
+                <td>Стажировка / junior позиция, где можно трогать реальные системы и это не считается "вредительством" + GitHub, который выглядит как живой</td>
             </tr>
         </table>
     </div>
 
-    <div class="gallery-section">
-        <h2 class="gallery-title">МОИ ХОББИ В ЛИЦАХ: ♡</h2>
+    <div class="gallery-section reveal">
+        <h2 class="section-title">hobbies.gallery</h2>
         <div class="gallery-grid">
             <div class="hobby-card">
                 <div class="img-wrapper">
@@ -106,7 +137,7 @@
             </div>
             <div class="hobby-card">
                 <div class="img-wrapper">
-                    <img src="https://i.pinimg.com/736x/9a/28/21/9a2821955ae5503192ba4531cafce5b0.jpg" alt="Конспекты" />
+                    <img src="https://i.pinimg.com/736x/9a/28/21/9a2821955ae5503192ba4531cafce5b0.jpg" alt="ESP" />
                 </div>
                 <p>еспшка не моя</p>
             </div>
@@ -118,16 +149,19 @@
             </div>
             <div class="hobby-card">
                 <div class="img-wrapper">
-                    <img src="https://i.pinimg.com/736x/0e/04/b1/0e04b13cefbee6ac993fb0a0d6140593.jpg" alt="lin" />
+                    <img src="https://i.pinimg.com/736x/0e/04/b1/0e04b13cefbee6ac993fb0a0d6140593.jpg" alt="Linux" />
                 </div>
-                <p>Линух красивая эстетик картинка</p>
+                <p>линух эстетика</p>
             </div>
         </div>
     </div>
 
-    <div class="footer-section">
+    <div class="footer-section reveal">
         <div>thank you for visiting &lt;3</div>
-        <div style="opacity: 0.5; margin-top: 5px;">© 2026 metaxxd</div>
+        <div style="opacity:.7; margin-top:6px; font-size:10px;">
+            подсказка: попробуй <span style="color:#ff7ad9">↑↑↓↓←→←→ B A</span>
+        </div>
+        <div style="opacity:.5; margin-top:8px;">© 2026 metaxxd</div>
     </div>
 
 </div>
