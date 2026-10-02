@@ -239,9 +239,10 @@ function triggerWelcomeAnimations() {
 // ───────────── 7. WINDOW CONTROLS ─────────────
 document.addEventListener("DOMContentLoaded", () => {
     const wrapper = document.querySelector('.page-wrapper');
-    const controlButtons = document.querySelectorAll('.window-controls .win-btn');
-    if (!wrapper || controlButtons.length < 3) return;
-    const [minimizeBtn, expandBtn, closeBtn] = controlButtons;
+    const minimizeBtn = document.querySelector('.window-controls .win-btn[title="свернуть"]');
+    const expandBtn   = document.querySelector('.window-controls .win-btn[title="развернуть"]');
+    const closeBtn    = document.querySelector('.window-controls .win-btn[title="закрыть"]');
+    if (!wrapper || !minimizeBtn || !expandBtn || !closeBtn) return;
 
     closeBtn.addEventListener('click', () => {
         if (confirm("Вы уверены, что хотите закрыть терминал profile.exe?")) {
@@ -262,26 +263,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let isExpanded = false;
     expandBtn.addEventListener('click', () => {
-        wrapper.style.transition = "max-width .4s cubic-bezier(.25,.46,.45,.94)";
         if (!isExpanded) {
-            wrapper.style.maxWidth = "100%";
+            wrapper.style.transition = "max-width .7s cubic-bezier(.25,.46,.45,.94), border-radius .7s, padding .7s";
+            wrapper.style.maxWidth = "100vw";
+            wrapper.style.borderRadius = "0";
+            wrapper.style.padding = "40px 48px";
             expandBtn.textContent = "⧉";
             isExpanded = true;
         } else {
+            wrapper.style.transition = "max-width .7s cubic-bezier(.25,.46,.45,.94), border-radius .7s, padding .7s";
             wrapper.style.maxWidth = "860px";
+            wrapper.style.borderRadius = "14px";
+            wrapper.style.padding = "40px 30px";
             expandBtn.textContent = "▢";
             isExpanded = false;
         }
     });
 
     minimizeBtn.addEventListener('click', () => {
-        wrapper.style.transition = "all .15s ease-in-out";
-        wrapper.style.opacity = "0.1";
-        wrapper.style.transform = "scaleY(0.05)";
+        wrapper.style.transformOrigin = "top center";
+        wrapper.style.transition = "transform .45s cubic-bezier(.55,.085,.68,.53), opacity .45s ease";
+        wrapper.style.transform = "scaleY(0.04)";
+        wrapper.style.opacity = "0.15";
         setTimeout(() => {
+            wrapper.style.transition = "transform .6s cubic-bezier(.16,1,.3,1), opacity .5s ease";
             wrapper.style.transform = "scaleY(1)";
             wrapper.style.opacity = "1";
-        }, 250);
+        }, 1000);
     });
 });
 
