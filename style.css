@@ -1,17 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=VT323&display=swap');
 
 /* ───────────── CSS VARS ───────────── */
 :root {
-    --pink: #ff52cc;
-    --pink-soft: #ff7ad9;
-    --pink-deep: #c2278c;
-    --violet: #b18fff;
-    --violet-deep: #5a1d6d;
-    --bg: #050409;
-    --bg-card: #07050d;
-    --green: #26f7a7;
-    --text: #f0e6f2;
-    --muted: #a39cb0;
+    --pink: #FF77A9;
+    --pink-soft: #ffaacf;
+    --pink-deep: #d94f8a;
+    --cyan: #4DEEEA;
+    --cyan-deep: #1ab8b5;
+    --violet: #c084fc;
+    --violet-deep: #7c3aed;
+    --bg: #0f0520;
+    --bg-card: #120820;
+    --green: #39ff14;
+    --text: #f5e6ff;
+    --muted: #c4b5d4;
 }
 
 * { box-sizing: border-box; }
@@ -23,7 +25,7 @@ body {
     margin: 0;
     padding: 30px 15px;
     font-family: 'JetBrains Mono', 'Comfortaa', monospace, sans-serif;
-    background: var(--bg);
+    background: linear-gradient(135deg, #0f0520 0%, #1a0a2e 40%, #0a0318 100%);
     color: var(--text);
     display: flex;
     justify-content: center;
@@ -38,7 +40,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: 0;
-    opacity: 0.35;
+    opacity: 0.18;
     pointer-events: none;
 }
 
@@ -48,8 +50,8 @@ body::before {
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(ellipse 60% 50% at 20% 0%, rgba(255, 82, 204, 0.18), transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 100%, rgba(177, 143, 255, 0.15), transparent 60%);
+        radial-gradient(ellipse 60% 50% at 20% 0%, rgba(255, 119, 169, 0.15), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 100%, rgba(77, 238, 234, 0.12), transparent 60%);
     pointer-events: none;
     z-index: 0;
 }
