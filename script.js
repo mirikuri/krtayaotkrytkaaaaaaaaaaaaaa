@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             wrapper.style.transition = "max-width .7s cubic-bezier(.25,.46,.45,.94), border-radius .7s, padding .7s";
             wrapper.style.maxWidth = "860px";
-            wrapper.style.borderRadius = "14px";
+            wrapper.style.borderRadius = "4px";
             wrapper.style.padding = "40px 30px";
             expandBtn.textContent = "▢";
             isExpanded = false;
