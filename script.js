@@ -89,7 +89,7 @@ function triggerWelcomeAnimations() {
     if (!console) return;
     const lines = [
         '&gt; initializing profile...',
-        '&gt; loading modules: <span class="keyword">python</span>, <span class="keyword">net</span>, <span class="keyword">ctf</span>',
+        '&gt; loading modules: <span class="keyword">C</span>, <span class="keyword">net</span>, <span class="keyword">ctf</span>',
         '&gt; status: <span class="success">ready</span>'
     ];
     console.innerHTML = '<span class="cursor-blink"></span>';
