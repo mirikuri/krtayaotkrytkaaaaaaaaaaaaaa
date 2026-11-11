@@ -63,5 +63,5 @@ export const gallery: GalleryItem[] = [
 ];
 
 export const credits =
-  'Фоны — визуальная новелла «Бесконечное лето» © Soviet Games, лицензия CC BY-NC-SA 4.0. Сайт некоммерческий.';
+  'Фоны и спрайт Лены — визуальная новелла «Бесконечное лето» © Soviet Games, лицензия CC BY-NC-SA 4.0. Сайт некоммерческий.';
 export const creditsUrl = 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru';

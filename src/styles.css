@@ -160,16 +160,34 @@ a {
   position: relative;
 }
 
+/* Character sprite on the right of the menu; cropped at the knees like a VN sprite. */
+.menu > .menu-sprite {
+  position: absolute;
+  right: clamp(24px, 12vw, 220px);
+  bottom: -22dvh;
+  height: 112dvh;
+  width: auto;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 12px 24px rgba(20, 12, 4, 0.35));
+}
+
+@media (max-width: 899px) {
+  .menu > .menu-sprite {
+    display: none;
+  }
+}
+
 .menu-title .title {
   margin: 0;
-  font: 700 clamp(72px, 13vw, 150px) / 0.9 var(--font-hand);
+  font: 700 clamp(44px, 8.5vw, 104px) / 0.95 var(--font-hand);
   color: #fff;
   text-shadow: 3px 3px 0 var(--ink), 6px 10px 18px rgba(0, 0, 0, 0.35);
 }
 
 .menu-title .subtitle {
   margin: 10px 0 0;
-  font: 400 clamp(22px, 3vw, 28px) / 1.2 var(--font-hand);
+  font: 400 clamp(26px, 3.6vw, 40px) / 1.2 var(--font-hand);
   color: #fff;
   text-shadow: 2px 2px 0 var(--ink);
 }

@@ -25,9 +25,19 @@ export default function MainMenu() {
   return (
     <div className="menu">
       <div className="menu-shade" aria-hidden="true" />
+      <motion.img
+        className="menu-sprite"
+        src="/img/lena.webp"
+        alt=""
+        aria-hidden="true"
+        width={317}
+        height={1500}
+        draggable={false}
+        {...fadeUp(reduce, 0.12, 10)}
+      />
       <motion.header className="menu-title" {...fadeUp(reduce, 0, 14)}>
-        <h1 className="title">metaxxd</h1>
-        <p className="subtitle">лето, CTF и немного NixOS ♡</p>
+        <h1 className="title">Добро пожаловать</h1>
+        <p className="subtitle">на мою страничку ♡</p>
       </motion.header>
 
       <nav className="menu-nav" aria-label="Главное меню">
