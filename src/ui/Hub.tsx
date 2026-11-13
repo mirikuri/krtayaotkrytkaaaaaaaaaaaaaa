@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { useGame } from '../engine/store';
+import { buzz } from '../engine/haptics';
 import { sectionOrder, scenes } from '../script/scenes';
 import { fadeUp } from './fx';
 
@@ -26,7 +27,10 @@ export default function Hub() {
               <button
                 type="button"
                 className={`choice${isVisited ? ' is-visited' : ''}`}
-                onClick={() => playScene(id)}
+                onClick={() => {
+                  buzz(10);
+                  playScene(id);
+                }}
               >
                 <span>{scenes[id].title}</span>
                 {isVisited && <span className="choice-check" aria-label="прочитано">✓</span>}
@@ -36,7 +40,10 @@ export default function Hub() {
         })}
         {allVisited && (
           <motion.li {...fadeUp(reduce, 0.05 * (sectionOrder.length + 1))}>
-            <button type="button" className="choice is-final" onClick={() => playScene('ending')}>
+            <button type="button" className="choice is-final" onClick={() => {
+              buzz(10);
+              playScene('ending');
+            }}>
               <span>Финал</span>
             </button>
           </motion.li>

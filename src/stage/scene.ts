@@ -3,6 +3,7 @@ import { Application, Assets, Container, Graphics, Sprite, Texture, type Ticker 
 import type { BgId, Mood } from '../engine/types';
 import { bgUrl, SMALL_BG_MAX_WIDTH } from './bgUrl';
 import { AmbientParticles, Fireworks } from './particles';
+import { tilt } from './tilt';
 
 const TAU = Math.PI * 2;
 const OVERSCAN = 1.04;
@@ -228,9 +229,13 @@ export class StageScene {
     this.bgLayer.scale.set(drift);
 
     // Parallax: opposite to pointer, smoothed.
-    const useParallax = motion && !this.coarse;
-    const tx = useParallax ? -this.pointerX * PARALLAX_BG_PX : 0;
-    const ty = useParallax ? -this.pointerY * PARALLAX_BG_PX : 0;
+    // Mouse on desktop; device tilt on phones once the user has allowed it.
+    const useTilt = this.coarse && tilt.active;
+    const useParallax = motion && (!this.coarse || useTilt);
+    const inX = useTilt ? tilt.x : this.pointerX;
+    const inY = useTilt ? tilt.y : this.pointerY;
+    const tx = useParallax ? -inX * PARALLAX_BG_PX : 0;
+    const ty = useParallax ? -inY * PARALLAX_BG_PX : 0;
     this.parX += (tx - this.parX) * PARALLAX_LERP;
     this.parY += (ty - this.parY) * PARALLAX_LERP;
     this.bgLayer.position.set(w / 2 + this.parX, h / 2 + this.parY);

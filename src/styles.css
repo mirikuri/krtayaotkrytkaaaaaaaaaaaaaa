@@ -28,6 +28,7 @@ html,
 body {
   margin: 0;
   height: 100%;
+  overscroll-behavior: none;
 }
 
 body {
@@ -43,6 +44,19 @@ button {
   color: inherit;
   cursor: pointer;
   transition: transform 160ms var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
 }
 
 button:active {
@@ -109,6 +123,15 @@ a {
   background: rgba(20, 12, 4, 0.38);
 }
 
+/* Scrollable screens: allow vertical pan only, so horizontal swipes are not taken by the browser. */
+.vn-screen--cv,
+.vn-screen--gallery,
+.vn-screen--hub,
+.backlog-scroll,
+.modal {
+  touch-action: pan-y;
+}
+
 .screen-bar {
   position: sticky;
   top: 0;
@@ -172,9 +195,38 @@ a {
   filter: drop-shadow(0 12px 24px rgba(20, 12, 4, 0.35));
 }
 
+/* Phones: the sprite stands at the right edge, cropped at the knees, behind the menu. */
 @media (max-width: 899px) {
   .menu > .menu-sprite {
-    display: none;
+    right: -2.5dvh;
+    bottom: -14dvh;
+    height: 78dvh;
+    z-index: 0;
+  }
+
+  .menu-shade {
+    background: linear-gradient(
+      90deg,
+      rgba(20, 12, 4, 0.72) 0%,
+      rgba(20, 12, 4, 0.4) 60%,
+      transparent 85%
+    );
+  }
+
+  .menu-title,
+  .menu-nav,
+  .menu-contacts {
+    z-index: 1;
+  }
+
+  .menu-title .title {
+    text-wrap: balance;
+    user-select: none;
+  }
+
+  /* Extra specificity: the base `.menu-nav ul` width is declared later in the file. */
+  .menu .menu-nav ul {
+    width: min(330px, 62vw);
   }
 }
 
@@ -288,6 +340,7 @@ a {
   justify-content: flex-end;
   cursor: pointer;
   user-select: none;
+  touch-action: none;
 }
 
 .play-shade {
@@ -337,21 +390,87 @@ a {
   background: var(--gold);
 }
 
-/* Phones: one compact row that scrolls sideways, with room for the name plate below it. */
+.qb:active,
+.qb-pop-item:active {
+  transform: scale(0.97);
+}
+
+/* Phones: compact row of three buttons, the rest in a popover above it. */
+.quickbar--mini {
+  display: none;
+}
+
+.qb-mini {
+  display: none;
+}
+
 @media (max-width: 639px) {
-  .quickbar {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    scrollbar-width: none;
-    margin-bottom: 26px;
-    padding-bottom: 2px;
+  .quickbar--full {
+    display: none;
+  }
+
+  .qb-mini {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    /* Room for the name plate, which sticks up 18px (plus tilt) above the text box. */
+    margin-bottom: 28px;
+  }
+
+  .quickbar--mini {
+    display: flex;
+    gap: 6px;
+    margin: 0;
   }
 
   .qb {
-    flex: 0 0 auto;
-    padding: 0 10px;
-    font-size: 13px;
+    padding: 0 12px;
+    font-size: 15px;
+  }
+
+  .qb-menu {
+    min-width: 48px;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .qb-pop {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 8px);
+    z-index: 2;
+    width: min(240px, 72vw);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: 0 12px 28px var(--shadow);
+    transform-origin: bottom right;
+  }
+
+  .qb-pop-item {
+    min-height: 44px;
+    padding: 0 14px;
+    background: var(--paper-2);
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+    color: var(--ink);
+  }
+
+  .qb-pop-item[aria-pressed="true"] {
+    background: var(--gold);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .qb-pop-item:hover {
+    background: color-mix(in srgb, var(--gold) 35%, var(--paper-2));
   }
 }
 
@@ -434,6 +553,20 @@ a {
   object-fit: cover;
 }
 
+/* Phones: round avatar inside the name plate, and a text box sized for 4 lines so it never jumps. */
+@media (max-width: 639px) {
+  .plate-avatar {
+    display: block;
+    flex: none;
+    width: 36px;
+    height: 36px;
+  }
+
+  .tb-panel {
+    min-height: calc(4 * 17px * 1.6 + 48px);
+  }
+}
+
 .tb-text {
   margin: 0;
   font-size: 17px;
@@ -504,6 +637,34 @@ a {
   color: #fff;
   text-shadow: 3px 3px 0 var(--ink);
   text-align: center;
+  text-wrap: balance;
+}
+
+/* Phones: full-width choices with 20px margins; content centred when it fits, scrollable when not. */
+@media (max-width: 639px) {
+  .hub {
+    padding: 24px 20px max(24px, env(safe-area-inset-bottom));
+  }
+
+  .hub > :first-child {
+    margin-top: auto;
+  }
+
+  .hub > :last-child {
+    margin-bottom: auto;
+  }
+
+  .hub-list {
+    width: 100%;
+  }
+
+  .choice {
+    min-height: 52px;
+  }
+
+  .link-btn {
+    min-height: 44px;
+  }
 }
 
 .hub-list {
@@ -925,6 +1086,16 @@ a {
 
 .switch[aria-checked="true"] {
   background: var(--red);
+}
+
+/* Touch: a larger invisible hit area around the 34px-high switch. */
+@media (pointer: coarse) {
+  .switch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: -6px -8px;
+  }
 }
 
 .switch-knob {

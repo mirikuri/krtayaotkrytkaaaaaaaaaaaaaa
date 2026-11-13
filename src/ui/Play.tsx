@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useGame } from '../engine/store';
 import { useTypewriter } from '../engine/useTypewriter';
 import { plainLength } from '../engine/markup';
+import { useSwipe } from '../engine/useSwipe';
 import TextBox from './TextBox';
 import QuickBar from './QuickBar';
 
@@ -16,6 +17,8 @@ export default function Play() {
   const next = useGame((s) => s.next);
   const back = useGame((s) => s.back);
   const goMenu = useGame((s) => s.goMenu);
+  const setOverlay = useGame((s) => s.setOverlay);
+  const sceneRef = useRef<HTMLDivElement>(null);
 
   const total = plainLength(line.text);
   const instant = skipping || textSpeed === 0;
@@ -50,6 +53,16 @@ export default function Play() {
     return () => window.removeEventListener('keydown', onKey);
   }, [overlay, done, finish, next, back, goMenu]);
 
+  // Touch: swipe right = previous line, left = advance, up = backlog.
+  useSwipe(sceneRef, {
+    onRight: back,
+    onLeft: () => {
+      if (done) next();
+      else finish();
+    },
+    onUp: () => setOverlay('backlog'),
+  });
+
   // Auto mode: wait for the line to be read, then advance.
   useEffect(() => {
     if (!auto || !done) return;
@@ -66,6 +79,7 @@ export default function Play() {
 
   return (
     <div
+      ref={sceneRef}
       className="play"
       onClick={() => {
         if (done) next();

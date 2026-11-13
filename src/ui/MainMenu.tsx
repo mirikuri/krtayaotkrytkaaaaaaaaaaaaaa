@@ -1,16 +1,43 @@
+import { useRef } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { useGame } from '../engine/store';
+import { buzz } from '../engine/haptics';
+import { requestTilt } from '../stage/tilt';
 import { contacts } from '../content/profile';
 import { fadeUp } from './fx';
+
+/** Taps on the title that unlock the secret scene: 7 within 3 seconds. */
+const SECRET_TAPS = 7;
+const SECRET_WINDOW_MS = 3000;
 
 export default function MainMenu() {
   const reduce = !!useReducedMotion();
   const startGame = useGame((s) => s.startGame);
   const openScreen = useGame((s) => s.openScreen);
   const setOverlay = useGame((s) => s.setOverlay);
+  const tapTimes = useRef<number[]>([]);
+
+  const onTitlePress = () => {
+    const now = performance.now();
+    tapTimes.current = tapTimes.current.filter((t) => now - t < SECRET_WINDOW_MS);
+    tapTimes.current.push(now);
+    const n = tapTimes.current.length;
+    if (n === 5) buzz(6); // subtle "getting warmer"
+    if (n >= SECRET_TAPS) {
+      tapTimes.current = [];
+      buzz([30, 40, 30, 40, 80]);
+      useGame.getState().triggerSecret();
+    }
+  };
 
   const items: { label: string; hint?: string; quick?: boolean; onClick: () => void }[] = [
-    { label: 'Начать', onClick: startGame },
+    {
+      label: 'Начать',
+      onClick: () => {
+        requestTilt();
+        startGame();
+      },
+    },
     {
       label: 'Резюме',
       hint: 'всё на одной странице',
@@ -36,7 +63,9 @@ export default function MainMenu() {
         {...fadeUp(reduce, 0.12, 10)}
       />
       <motion.header className="menu-title" {...fadeUp(reduce, 0, 14)}>
-        <h1 className="title">Добро пожаловать</h1>
+        <h1 className="title" onPointerDown={onTitlePress}>
+          Добро пожаловать
+        </h1>
         <p className="subtitle">на мою страничку ♡</p>
       </motion.header>
 
@@ -47,7 +76,10 @@ export default function MainMenu() {
               <button
                 type="button"
                 className={`menu-btn${it.quick ? ' is-quick' : ''}`}
-                onClick={it.onClick}
+                onClick={() => {
+                  buzz(8);
+                  it.onClick();
+                }}
               >
                 <span className="menu-btn-label">{it.label}</span>
                 {it.hint && <small>{it.hint}</small>}
